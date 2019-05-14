@@ -23,7 +23,9 @@ default: &default
 
 development:
   <<: *default
-  database: training_db_webapp_development
+  database: training_db
+  username: training
+  password: training
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
