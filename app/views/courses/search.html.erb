@@ -1,1 +1,24 @@
-<p>search result</p>
+<h1>search result</h1>
+<p><%= @courses.length %> rows found.</p>
+<table>
+  <thead>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Topic</th>
+    <th>Day</th>
+    <th>Price</th>
+    <th>Level</th>
+    <th>Category</th>
+  </thead>
+  <% @courses.each do |course| %>
+    <tr>
+      <td><%= course.course_id %></td>
+      <td><%= course.course_title %></td>
+      <td><%= course.topic %></td>
+      <td><%= course.day_length %></td>
+      <td><%= course.price %></td>
+      <td><%= course.level_id %></td>
+      <td><%= course.category %></td>
+    </tr>
+  <% end %>
+</table>
