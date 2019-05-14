@@ -12,7 +12,7 @@
   </thead>
   <% @courses.each do |course| %>
     <tr>
-      <td><%= link_to course.course_id, courses_show_path(id: course.course_id) %></td>
+      <td><%= link_to course.course_id, course_show_path(id: course.course_id) %></td>
       <td><%= course.course_title %></td>
       <td><%= course.topic %></td>
       <td><%= course.day_length %></td>

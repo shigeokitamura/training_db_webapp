@@ -1,48 +1,64 @@
 <h1>single course</h1>
-<%= link_to "delete this course ? ...", courses_delete_path(@course.course_id) %>
+<%= link_to "delete this course ? ...", course_delete_path(id: @course.course_id) %>
 
-<form action="#" method="GET">
+<%= form_for(@course) do |f| %>
   <table>
     <tr>
-      <th>course_id</th>
-      <td><%= @course.course_id %></td>
-    </tr>
-    <tr>
-      <th>course_title</th>
+      <th>
+        course_id
+      </th>
       <td>
-        <input type="text" value="<%= @course.course_title %>" required>
+        <%= @course.course_id %>
       </td>
     </tr>
     <tr>
-      <th>topic</th>
+      <th>
+        <%= f.label :course_title, "course_title" %>
+      </th>
       <td>
-        <input type="text" value="<%= @course.topic %>">
+        <%= f.text_field :course_title, required: true, maxlength: 50 %>
       </td>
     </tr>
     <tr>
-      <th>day_length</th>
+      <th>
+        <%= f.label :topic, "topic" %>
+      </th>
       <td>
-        <input type="number" min="1" max="7" value="<%= @course.day_length %>" required>
+        <%= f.text_field :topic, maxlength: 100 %>
       </td>
     </tr>
     <tr>
-      <th>price</th>
+      <th>
+        <%= f.label :day_length, "day_length" %>
+      </th>
       <td>
-        <input type="number" min="0" max="999999" value="<%= @course.price %>" required>
+        <%= f.number_field :day_length, required: true, min: 1, max: 7 %>
       </td>
     </tr>
     <tr>
-      <th>level_id</th>
+      <th>
+        <%= f.label :price, "price" %>
+      </th>
       <td>
-        <input type="number" min="1" max="5" value="<%= @course.level_id %>" required>
+        <%= f.number_field :price, required: true, min: 0, max: 999999 %>
       </td>
     </tr>
     <tr>
-      <th>category</th>
+      <th>
+        <%= f.label :level_id, "level_id" %>
+      </th>
       <td>
-        <input type="text" value="<%= @course.category %>" required>
+        <%= f.number_field :level_id, required: true, min: 1, max: 5 %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <%= f.label :category, "category" %>
+      </th>
+      <td>
+        <%= f.text_field :category, required: true, pattern: "^[0-9A-Za-z]+$", maxlength: 40 %>
       </td>
     </tr>
   </table>
-  <input type="submit" value="submit">
-</form>
+  <%= f.submit "submit" %>
+<% end %>
