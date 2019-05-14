@@ -1,0 +1,48 @@
+<h1>single course</h1>
+<%= link_to "delete this course ? ...", courses_delete_path(@course.course_id) %>
+
+<form action="#" method="GET">
+  <table>
+    <tr>
+      <th>course_id</th>
+      <td><%= @course.course_id %></td>
+    </tr>
+    <tr>
+      <th>course_title</th>
+      <td>
+        <input type="text" value="<%= @course.course_title %>" required>
+      </td>
+    </tr>
+    <tr>
+      <th>topic</th>
+      <td>
+        <input type="text" value="<%= @course.topic %>">
+      </td>
+    </tr>
+    <tr>
+      <th>day_length</th>
+      <td>
+        <input type="number" min="1" max="7" value="<%= @course.day_length %>" required>
+      </td>
+    </tr>
+    <tr>
+      <th>price</th>
+      <td>
+        <input type="number" min="0" max="999999" value="<%= @course.price %>" required>
+      </td>
+    </tr>
+    <tr>
+      <th>level_id</th>
+      <td>
+        <input type="number" min="1" max="5" value="<%= @course.level_id %>" required>
+      </td>
+    </tr>
+    <tr>
+      <th>category</th>
+      <td>
+        <input type="text" value="<%= @course.category %>" required>
+      </td>
+    </tr>
+  </table>
+  <input type="submit" value="submit">
+</form>
