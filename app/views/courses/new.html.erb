@@ -1,26 +1,35 @@
-<h1>new course</h1>
-
-<%= form_for(@course) do |f| %>
-  <%= f.label :course_id, "course_id" %>
-  <%= f.text_field :course_id, required: true, pattern: "^[0-9A-Za-z---]+$", maxlength: 20 %>
-  <br>
-  <%= f.label :course_title, "course_title" %>
-  <%= f.text_field :course_title, required: true, maxlength: 50 %>
-  <br>
-  <%= f.label :topic, "topic" %>
-  <%= f.text_field :topic, maxlength: 100 %>
-  <br>
-  <%= f.label :day_length, "day_length" %>
-  <%= f.number_field :day_length, required: true, min: 1, max: 7 %>
-  <br>
-  <%= f.label :price, "price" %>
-  <%= f.number_field :price, required: true, min: 0, max: 999999 %>
-  <br>
-  <%= f.label :level_id, "level_id" %>
-  <%= f.number_field :level_id, required: true, min: 1, max: 5 %>
-  <br>
-  <%= f.label :category, "category" %>
-  <%= f.text_field :category, required: true, pattern: "^[0-9A-Za-z]+$", maxlength: 40 %>
-  <br>
-  <%= f.submit "submit" %>
-<% end %>
+<div class="container">
+  <h1>new course</h1>
+  
+  <%= form_for(@course) do |f| %>
+    <div class="form-group">
+      <%= f.label :course_id, "course_id" %>
+      <%= f.text_field :course_id, class: "form-control", required: true, pattern: "^[0-9A-Za-z---]+$", maxlength: 20 %>
+    </div>
+    <div class="form-group">
+      <%= f.label :course_title, "course_title" %>
+      <%= f.text_field :course_title, class: "form-control", required: true, maxlength: 50 %>
+    </div>
+    <div class="form-group">
+      <%= f.label :topic, "topic" %>
+      <%= f.text_field :topic, class: "form-control", maxlength: 100 %>
+    </div>
+    <div class="form-group">
+      <%= f.label :day_length, "day_length" %>
+      <%= f.number_field :day_length, class: "form-control", required: true, min: 1, max: 7 %>
+    </div>
+    <div class="form-group">
+    <%= f.label :price, "price" %>
+      <%= f.number_field :price, class: "form-control", required: true, min: 0, max: 999999 %>
+    </div>
+    <div class="form-group">
+      <%= f.label :level_id, "level_id" %>
+      <%= f.number_field :level_id, class: "form-control", required: true, min: 1, max: 5 %>
+    </div>
+    <div class="form-group">
+      <%= f.label :category, "category" %>
+      <%= f.text_field :category, class: "form-control", required: true, pattern: "^[0-9A-Za-z]+$", maxlength: 40 %>
+    </div>
+    <%= f.submit "submit", class: "btn btn-primary" %>
+  <% end %>
+</div>
