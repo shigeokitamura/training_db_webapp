@@ -3,7 +3,13 @@ class CoursesController < ApplicationController
   end
 
   def search
-    @courses = Course.all
+    if params[:keyword]
+      @courses = Course.where("course_title ILIKE ? OR topic ILIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+    elsif params[:category]
+      @courses = Course.where("category ILIKE ?", "%#{params[:category]}%")
+    else
+      @courses = Course.all
+    end
   end
 
   def show
