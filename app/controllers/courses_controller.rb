@@ -33,7 +33,8 @@ class CoursesController < ApplicationController
   def update
     @course = Course.find(params[:id])
     if @course.update_attributes(course_params)
-      render 'show'
+      flash[:success] = "Course #{@course.course_id} has been successfully updated."
+      redirect_to course_show_path(id: @course.course_id)
     else
       render 'show'
     end
@@ -44,7 +45,9 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    Course.find(params[:id]).destroy
+    course = Course.find(params[:id])
+    course.destroy
+    flash.now[:danger] = "Course #{course.course_id} has been deleted."
     render 'deleted'
   end
   

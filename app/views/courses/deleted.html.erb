@@ -1,3 +1,6 @@
-<p>course deleted.</p>
-
-<p><%= link_to "go top.", root_path %></p>
+<div class="container">
+  <% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
+  <p><%= link_to "go top.", root_path %></p>
+</div>

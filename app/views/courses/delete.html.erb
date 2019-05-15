@@ -1,34 +1,40 @@
-<h1>delete course</h1>
+<div class="container">
+  <h1>delete course</h1>
 
-<table>
-  <tr>
-    <th>course_id</th>
-    <td><%= @course.course_id %></td>
-  </tr>
-  <tr>
-    <th>course_title</th>
-    <td><%= @course.course_title %></td>
-  </tr>
-  <tr>
-    <th>topic</th>
-    <td><%= @course.topic %></td>
-  </tr>
-  <tr>
-    <th>day_length</th>
-    <td><%= @course.day_length %></td>
-  </tr>
-  <tr>
-    <th>price</th>
-    <td><%= @course.price %></td>
-  </tr>
-  <tr>
-    <th>level_id</th>
-    <td><%= @course.level_id %></td>
-  </tr>
-  <tr>
-    <th>category</th>
-    <td><%= @course.category %></td>
-  </tr>
-</table>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th scope="row">course_id</th>
+        <td><%= @course.course_id %></td>
+      </tr>
+      <tr>
+        <th scope="row">course_title</th>
+        <td><%= @course.course_title %></td>
+      </tr>
+      <tr>
+        <th scope="row">topic</th>
+        <td><%= @course.topic %></td>
+      </tr>
+      <tr>
+        <th scope="row">day_length</th>
+        <td><%= @course.day_length %></td>
+      </tr>
+      <tr>
+        <th scope="row">price</th>
+        <td><%= @course.price %></td>
+      </tr>
+      <tr>
+        <th scope="row">level_id</th>
+        <td><%= @course.level_id %></td>
+      </tr>
+      <tr>
+        <th scope="row">category</th>
+        <td><%= @course.category %></td>
+      </tr>
+    </tbody>
+  </table>
 
-<%= link_to "delete", @course, method: :delete %>
+  <%= link_to "delete", @course, method: :delete, class: "btn btn-danger",
+    data: { confirm: "Are you sure?" }
+  %>
+</div>

@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get '/show/:id', to: 'courses#show', as: 'course_show'
   get '/new', to: 'courses#new'
   get '/delete/:id', to: 'courses#delete', as: 'course_delete'
-  get '/deleted', to: 'courses#deleted'
 
   resources :courses
 end

@@ -1,0 +1,56 @@
+<%= form_for(@course) do |f| %>
+  <%= render 'shared/error_messages' %>
+  <div class="form-group">
+    <%= f.label :course_id, "course_id" %>
+    <%= f.text_field :course_id, class: "form-control", required: true, 
+      readonly: controller.action_name.eql?("show"),
+      pattern: "^[0-9A-Za-z-\--]+$", maxlength: 20 
+    %>
+    <% @course.errors.full_messages_for(:course_id).each do |message| %>
+      <p class="text-danger"><%= message %></p>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :course_title, "course_title" %>
+    <%= f.text_field :course_title, class: "form-control", required: true, maxlength: 50 %>
+    <% @course.errors.full_messages_for(:course_title).each do |message| %>
+      <p class="text-danger"><%= message %></p>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :topic, "topic" %>
+    <%= f.text_field :topic, class: "form-control", maxlength: 100 %>
+    <% @course.errors.full_messages_for(:topic).each do |message| %>
+      <p class="text-danger"><%= message %></p>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :day_length, "day_length" %>
+    <%= f.number_field :day_length, class: "form-control", required: true, min: 1, max: 7 %>
+    <% @course.errors.full_messages_for(:day_length).each do |message| %>
+      <p class="text-danger"><%= message %></p>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :price, "price" %>
+    <%= f.number_field :price, class: "form-control", required: true, min: 0, max: 999999 %>
+    <% @course.errors.full_messages_for(:price).each do |message| %>
+      <p class="text-danger"><%= message %></p>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :level_id, "level_id" %>
+    <%= f.number_field :level_id, class: "form-control", required: true, min: 1, max: 5 %>
+    <% @course.errors.full_messages_for(:level_id).each do |message| %>
+      <p class="text-danger"><%= message %></p>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :category, "category" %>
+    <%= f.text_field :category, class: "form-control", required: true, pattern: "^[0-9A-Za-z]+$", maxlength: 40 %>
+    <% @course.errors.full_messages_for(:category).each do |message| %>
+      <p class="text-danger"><%= message %></p>
+    <% end %>
+  </div>
+  <%= f.submit "submit", class: "btn btn-primary" %>
+<% end %>
