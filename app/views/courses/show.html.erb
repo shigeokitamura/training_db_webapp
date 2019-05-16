@@ -1,9 +1,9 @@
 <div class="container">
-  <h1>single course</h1>
+  <h1>Show single course</h1>
   <% flash.each do |message_type, message| %>
     <div class="alert alert-<%= message_type %>"><%= message %></div>
   <% end %>
-  <%= link_to "delete this course ? ...", course_delete_path(id: @course.course_id) %>
-
+  <p><%= link_to "delete this course ? ...", course_delete_path(id: @course.course_id), class: "text-danger" %></p>
+  <br>
   <%= render 'courses/form' %>
 </div>

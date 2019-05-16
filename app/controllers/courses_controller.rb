@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   def top
+    
   end
 
   def search
