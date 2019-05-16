@@ -1,20 +1,20 @@
 class CoursesController < ApplicationController
   def top
-    @categories = Course.group(:category).count.keys
-      .insert(0, "ALL")
+    @categories = Course.group(:category).count.keys.
+                  insert(0, "ALL")
   end
 
   def search
     if params[:category]
       keyword = "%#{params[:keyword]}%"
       category = params[:category]
-      if category == "ALL"
-        @courses = Course.where("course_title ILIKE ? OR topic ILIKE ?",
-          keyword, keyword)
-      else
-        @courses = Course.where("(course_title ILIKE ? OR topic ILIKE ?) AND category LIKE ?",
-          keyword, keyword, category)
-      end
+      @courses = if category == "ALL"
+                   Course.where("course_title ILIKE ? OR topic ILIKE ?",
+                                keyword, keyword)
+                 else
+                   Course.where("(course_title ILIKE ? OR topic ILIKE ?) AND category LIKE ?",
+                                keyword, keyword, category)
+                 end
     else
       @courses = Course.all
     end
@@ -40,7 +40,7 @@ class CoursesController < ApplicationController
 
   def update
     @course = Course.find(params[:id])
-    if @course.update_attributes(course_params)
+    if @course.update(course_params)
       flash[:success] = "Course #{@course.course_id} has been successfully updated."
       redirect_to course_show_path(id: @course.course_id)
     else
@@ -58,9 +58,10 @@ class CoursesController < ApplicationController
     flash.now[:danger] = "Course #{course.course_id} has been deleted."
     render 'deleted'
   end
-  
+
   private
-    def course_params
-      params.require(:course).permit(:course_id, :course_title, :topic, :day_length, :price, :level_id, :category)
-    end
+
+  def course_params
+    params.require(:course).permit(:course_id, :course_title, :topic, :day_length, :price, :level_id, :category)
+  end
 end
