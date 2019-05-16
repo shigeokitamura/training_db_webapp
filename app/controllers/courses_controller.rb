@@ -1,13 +1,20 @@
 class CoursesController < ApplicationController
   def top
-    
+    @categories = Course.group(:category).count.keys
+      .insert(0, "ALL")
   end
 
   def search
-    if params[:keyword]
-      @courses = Course.where("course_title ILIKE ? OR topic ILIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-    elsif params[:category]
-      @courses = Course.where("category ILIKE ?", "%#{params[:category]}%")
+    if params[:category]
+      keyword = "%#{params[:keyword]}%"
+      category = params[:category]
+      if category == "ALL"
+        @courses = Course.where("course_title ILIKE ? OR topic ILIKE ?",
+          keyword, keyword)
+      else
+        @courses = Course.where("(course_title ILIKE ? OR topic ILIKE ?) AND category LIKE ?",
+          keyword, keyword, category)
+      end
     else
       @courses = Course.all
     end
