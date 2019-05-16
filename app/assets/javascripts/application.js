@@ -15,8 +15,8 @@
 //= require turbolinks
 //= require_tree .
 
-//= require jquery3
+//= require jquery
+//= require jquery-ui
 //= require popper
 //= require bootstrap-sprockets
 //= require data-confirm-modal
-//= require tabulator

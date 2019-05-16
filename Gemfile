@@ -14,8 +14,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap', '~> 4.1.3'
 # Javascript plugins
 gem 'jquery-rails', '~>4.3.3'
+gem 'jquery-ui-rails'
 gem 'data-confirm-modal', '~>1.6.2'
-gem 'tabulator-rails', '~> 1.1', '>= 1.1.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
