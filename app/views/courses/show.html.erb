@@ -3,7 +3,7 @@
   <% flash.each do |message_type, message| %>
     <div class="alert alert-<%= message_type %>"><%= message %></div>
   <% end %>
-  <p><%= link_to "delete this course ? ...", course_delete_path(id: @course.course_id), class: "text-danger" %></p>
+  <p><%= link_to "Delete this course ?", course_delete_path(id: @course.course_id), class: "text-danger" %></p>
   <br>
   <%= render 'courses/form' %>
 </div>
