@@ -1,4 +1,8 @@
 class CoursesController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    redirect_to :root, alert: 'Course not found'
+  end
+
   def top
     @categories = Course.group(:category).count.keys.
                   insert(0, "ALL")
@@ -12,8 +16,8 @@ class CoursesController < ApplicationController
                    Course.where("course_title ILIKE ? OR topic ILIKE ?",
                                 keyword, keyword)
                  else
-                   Course.where("(course_title ILIKE ? OR topic ILIKE ?) AND category LIKE ?",
-                                keyword, keyword, category)
+                   Course.where("category LIKE ? AND (course_title ILIKE ? OR topic ILIKE ?)",
+                                category, keyword, keyword)
                  end
     else
       @courses = Course.all

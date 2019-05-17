@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Search results</h1>
-  <% if @courses.length > 0 %>
-    <p><%= pluralize(@courses.length, "row") %> found.</p>
+  <% if @courses.length > 1 %>
+    <p><%= @courses.length %> rows found.</p>
     <table id="course_table" class="tablesorter">
       <thead>
         <th>Id</th>
@@ -24,7 +24,11 @@
         </tr>
       <% end %>
     </table>
-  <% else %>
+  <% elsif @courses.length == 1%>
+    <script type="text/javascript">
+      window.location.href="<%= course_show_path(id: @courses.first.course_id) %>";
+    </script>
+  <% elsif @courses.length == 0 %>
     <p class="text-danger">No rows found.</p>
     <p><%= link_to "Back to top", root_path %></p>
   <% end %>
