@@ -6,7 +6,9 @@
       readonly: controller.action_name.eql?("show"),
       pattern: "^[0-9A-Za-z-\--]+$", maxlength: 20, placeholder: "course_id" 
     %>
-    <small class="text-info">Alphanumeric and dash, within 20 characters</small>
+    <% unless controller.action_name.eql?("show") %>
+      <small class="text-info">Alphanumeric and dash, within 20 characters</small>
+    <% end %>
     <% @course.errors.full_messages_for(:course_id).each do |message| %>
       <p class="text-danger"><%= message %></p>
     <% end %>
