@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   get '/delete/:id', to: 'courses#delete', as: 'course_delete'
 
   resources :courses
+
+  get '/sign_up', to: 'users#new'
+  resources :users
 end
