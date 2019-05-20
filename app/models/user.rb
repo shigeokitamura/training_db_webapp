@@ -13,11 +13,11 @@ class User < ApplicationRecord
   validates :age,
             presence: true,
             length: { maximum: 2 }
-  
+
   validates :dept,
             presence: true,
             length: { maximum: 2 }
-  
+
   has_secure_password
   validates :password,
             presence: true,

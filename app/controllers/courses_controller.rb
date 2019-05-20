@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound do |exception|
+    logger.debug(exception)
     redirect_to :root, alert: 'Course not found'
   end
 
