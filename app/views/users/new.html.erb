@@ -9,13 +9,16 @@
   <% end %>
   <%= form_for(@user) do |f| %>
     <div class="form-group">
-      <%= f.label :user_id, "ID" %>
-      <%= f.text_field :user_id, class: "form-control",
-        required: true, maxlength: 20, placeholder: "user_id",
-        pattern: "^[0-9A-Za-z]+$"
-      %>
-      <small class="text-info">Alphanumeric</small>
       <% @user.errors.full_messages_for(:user_id).each do |message| %>
+        <p class="text-danger"><%= message %></p>
+      <% end %>
+    </div>
+    <div class="form-group">
+      <%= f.label :user_name, "Name" %>
+      <%= f.text_field :user_name, class: "form-control",
+        required: true, maxlength: 50, placeholder: "user_name"
+      %>
+      <% @user.errors.full_messages_for(:user_name).each do |message| %>
         <p class="text-danger"><%= message %></p>
       <% end %>
     </div>
@@ -30,16 +33,6 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, class: "form-control", required: true %>
       <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
-        <p class="text-danger"><%= message %></p>
-      <% end %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :user_name, "Name" %>
-      <%= f.text_field :user_name, class: "form-control",
-        required: true, maxlength: 50, placeholder: "user_name"
-      %>
-      <% @user.errors.full_messages_for(:user_name).each do |message| %>
         <p class="text-danger"><%= message %></p>
       <% end %>
     </div>
