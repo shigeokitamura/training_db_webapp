@@ -25,7 +25,7 @@
         </tr>
       <% end %>
     </table>
-  <% elsif @courses.length == 1%>
+  <% elsif @courses.length == 1 %>
     <script type="text/javascript">
       window.location.href="<%= course_show_path(id: @courses.first.course_id) %>";
     </script>
