@@ -22,4 +22,3 @@ describe 'New' do
     expect(page).to have_title "New | #{base_title}"
   end
 end
-

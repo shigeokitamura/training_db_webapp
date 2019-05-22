@@ -25,10 +25,6 @@
         </tr>
       <% end %>
     </table>
-  <% elsif @courses.length == 1 %>
-    <script type="text/javascript">
-      window.location.href="<%= course_show_path(id: @courses.first.course_id) %>";
-    </script>
   <% elsif @courses.length == 0 %>
     <p class="text-danger">No rows found.</p>
     <p><%= link_to "Back to top", root_path %></p>
