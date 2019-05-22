@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CoursesController, type: :controller do
   describe 'GET #show' do
     let(:course) { FactoryBot.create(:course) }
-    before {get :show, params: { id: course.course_id }}
+    before { get :show, params: { id: course.course_id } }
 
     it 'has a 200 status code' do
       expect(response).to have_http_status(:ok)
@@ -42,6 +42,58 @@ RSpec.describe CoursesController, type: :controller do
       post :create, params: { course: course_attributes }
       course = Course.last
       expect(response).to redirect_to(course_show_path(course))
+    end
+
+    # 異常系
+    it 'should not be created with invalid :course_id' do
+      course_attributes[:course_id] = '???'
+      expect do
+        post :create, params: { course: course_attributes }
+      end.not_to change(Course, :count)
+    end
+    it 'should not be created with invalid :course_title' do
+      course_attributes[:course_title] = ''
+      expect do
+        post :create, params: { course: course_attributes }
+      end.not_to change(Course, :count)
+    end
+    it 'should not be created with invalid :day_length' do
+      course_attributes[:day_length] = 0
+      expect do
+        post :create, params: { course: course_attributes }
+      end.not_to change(Course, :count)
+
+      course_attributes[:day_length] = 8
+      expect do
+        post :create, params: { course: course_attributes }
+      end.not_to change(Course, :count)
+    end
+    it 'should not be created with invalid :price' do
+      course_attributes[:price] = -1
+      expect do
+        post :create, params: { course: course_attributes }
+      end.not_to change(Course, :count)
+      course_attributes[:price] = 1000000
+      expect do
+        post :create, params: { course: course_attributes }
+      end.not_to change(Course, :count)
+    end
+    it 'should not be created with invalid :level_id' do
+      course_attributes[:level_id] = 0
+      expect do
+        post :create, params: { course: course_attributes }
+      end.not_to change(Course, :count)
+
+      course_attributes[:level_id] = 6
+      expect do
+        post :create, params: { course: course_attributes }
+      end.not_to change(Course, :count)
+    end
+    it 'should not be created with invalid :category' do
+      course_attributes[:category] = '---'
+      expect do
+        post :create, params: { course: course_attributes }
+      end.not_to change(Course, :count)
     end
   end
 
@@ -82,7 +134,7 @@ RSpec.describe CoursesController, type: :controller do
 
   describe 'GET #delete' do
     let(:course) { FactoryBot.create(:course) }
-    before {get :delete, params: { id: course.course_id }}
+    before { get :delete, params: { id: course.course_id } }
 
     it 'has a 200 status code' do
       expect(response).to have_http_status(:ok)
