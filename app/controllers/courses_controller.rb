@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound do |exception|
+    logger.debug(exception)
     redirect_to :root, alert: 'Course not found'
   end
 
@@ -19,6 +20,7 @@ class CoursesController < ApplicationController
                    Course.where("category LIKE ? AND (course_title ILIKE ? OR topic ILIKE ?)",
                                 category, keyword, keyword)
                  end
+      redirect_to course_show_path(id: @courses.first.course_id) if @courses.length == 1
     else
       @courses = Course.all
     end

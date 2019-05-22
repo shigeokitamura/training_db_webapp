@@ -12,13 +12,13 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
-  
+
   private
 
   def user_params
     id = User.maximum('user_id') + 1
-    params.require(:user)
-      .permit(:user_name, :age, :dept, :password, :password_confirmation)
-      .merge(user_id: id)
+    params.require(:user).
+      permit(:user_name, :age, :dept, :password, :password_confirmation).
+      merge(user_id: id)
   end
 end
