@@ -4,7 +4,7 @@ class Course < ApplicationRecord
   validates :course_id,
             presence: true,
             length: { maximum: 20 },
-            format: { with: /\A[0-9A-Za-z-\--]+\z/ },
+            format: { with: /\A[0-9A-Za-z\-]+\z/ },
             uniqueness: true
 
   validates :course_title,
