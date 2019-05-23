@@ -7,4 +7,19 @@
   <p><%= link_to "Delete this course ?", course_delete_path(id: @course.course_id), class: "text-danger" %></p>
   <br>
   <%= render 'courses/form' %>
+  <br>
+  <% if logged_in? %>
+    <% unless current_user.buying?(@course) %>
+      <%= form_for(current_user.active_orders.build) do |f| %>
+        <div><%= hidden_field_tag :bought_id, @course.course_id %></div>
+        <%= f.submit "Order this course",class: "btn btn-success" %>
+      <% end %>
+    <% else %>
+      <%= form_for(current_user.active_orders.find_by(bought_id: @course.course_id),
+        html: { method: :delete }) do |f|
+      %>
+        <%= f.submit "Cancel order", class: "btn btn-danger" %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
