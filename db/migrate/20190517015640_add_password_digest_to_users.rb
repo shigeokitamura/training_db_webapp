@@ -97,7 +97,6 @@ class AddPasswordDigestToUsers < ActiveRecord::Migration[5.2]
       t.string "user_name", limit: 20, null: false
       t.integer "age", limit: 2, null: false
       t.integer "dept", limit: 2, null: false
-      t.string "password_digest"
     end
 
     add_column :users, :password_digest, :string
