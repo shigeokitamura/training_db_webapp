@@ -4,7 +4,7 @@
     <%= f.label :course_id, "Course ID" %>
     <%= f.text_field :course_id, class: "form-control", required: true, 
       readonly: controller.action_name.eql?("show"),
-      pattern: "^[0-9A-Za-z-\--]+$", maxlength: 20, placeholder: "course_id" 
+      pattern: "^[0-9A-Za-z\-]+$", maxlength: 20, placeholder: "course_id" 
     %>
     <% unless controller.action_name.eql?("show") %>
       <small class="text-info">Alphanumeric and dash, within 20 characters</small>
