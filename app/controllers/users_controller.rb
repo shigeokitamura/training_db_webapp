@@ -29,7 +29,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    id = User.maximum('user_id') + 1
+    # 最初のユーザはidは1、それ以降のidは最大値+1
+    id = User.maximum('user_id').nil? ? 1 : User.maximum('user_id') + 1
     params.require(:user).
       permit(:user_name, :age, :dept, :password, :password_confirmation).
       merge(user_id: id)
