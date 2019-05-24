@@ -36,6 +36,33 @@ class User < ApplicationRecord
             presence: true,
             length: { minimum: 6 },
             format: { with: /\A[0-9A-Za-z]+\z/ }
+
+  has_many :active_orders, class_name: "Order",
+                           foreign_key: "buyer_id",
+                           dependent: :destroy,
+                           inverse_of: :buyer
+  has_many :passive_orders, class_name: "Order",
+                            foreign_key: "bought_id",
+                            dependent: :destroy,
+                            inverse_of: :bought
+  has_many :buying, through: :active_orders, source: :bought
+  has_many :buyers, through: :passive_orders
+
+  # コースを購入する
+  def buy(course)
+    buying << course
+  end
+
+  # 購入をやめる
+  def cancel(course)
+    active_orders.find_by(bought_id: course.course_id).destroy
+  end
+
+  # 購入していたらtrueを返す
+  def buying?(course)
+    buying.include?(course)
+  end
+
 end
 
 # rails g model User --migration false
