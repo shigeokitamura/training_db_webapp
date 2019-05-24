@@ -22,13 +22,9 @@ class UsersController < ApplicationController
     @total = @orders.sum { |hash| hash[:price] }
   end
 
-  def edit
+  def edit; end
 
-  end
-
-  def update
-
-  end
+  def update; end
 
   private
 
