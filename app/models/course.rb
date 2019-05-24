@@ -42,4 +42,15 @@ class Course < ApplicationRecord
             presence: true,
             length: { maximum: 40 },
             format: { with: /\A[0-9A-Za-z]+\z/ }
+
+  has_many :active_orders, class_name: "Order",
+                           foreign_key: "bought_id",
+                           dependent: :destroy,
+                           inverse_of: :bought
+  has_many :passive_orders, class_name: "Order",
+                            foreign_key: "buyer_id",
+                            dependent: :destroy,
+                            inverse_of: :buyer
+  has_many :buyers, through: :active_orders
+  has_many :buying, through: :passive_orders, source: :bought
 end

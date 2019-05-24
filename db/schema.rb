@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_17_015640) do
+ActiveRecord::Schema.define(version: 2019_05_23_022938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,16 @@ ActiveRecord::Schema.define(version: 2019_05_17_015640) do
   create_table "optimism", id: :integer, default: nil, force: :cascade do |t|
     t.string "name", limit: 10
     t.integer "version"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "buyer_id"
+    t.string "bought_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bought_id"], name: "index_orders_on_bought_id"
+    t.index ["buyer_id", "bought_id"], name: "index_orders_on_buyer_id_and_bought_id", unique: true
+    t.index ["buyer_id"], name: "index_orders_on_buyer_id"
   end
 
   create_table "partner", primary_key: "instructor_id", id: :string, limit: 11, default: "", force: :cascade do |t|
