@@ -39,10 +39,12 @@ class User < ApplicationRecord
 
   has_many :active_orders, class_name: "Order",
                            foreign_key: "buyer_id",
-                           dependent: :destroy
+                           dependent: :destroy,
+                           inverse_of: :buyer
   has_many :passive_orders, class_name: "Order",
                             foreign_key: "bought_id",
-                            dependent: :destroy
+                            dependent: :destroy,
+                            inverse_of: :bought
   has_many :buying, through: :active_orders, source: :bought
   has_many :buyers, through: :passive_orders
 

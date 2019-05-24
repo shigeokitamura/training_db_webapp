@@ -1,0 +1,39 @@
+<% provide(:title, "User") %>
+
+<div class="container">
+  <h1><%= @user.user_name %></h1>
+  <% if @orders.length > 0 %>
+    <p><%= ('Course').pluralize(@orders.length) %> you ordered</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <% course = Course.find_by(course_id: order.course_id) %>
+          <tr>
+            <th scope="row">
+              <%= link_to course.course_id, course_show_path(id: course.course_id) %>
+            </th>
+            <td>
+              <%= course.course_title %>
+            </td>
+            <td>
+              <%= course.price.to_s(:delimited) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan=2>Total amount</th>
+          <th><%= @total.to_s(:delimited) %></th>
+        </tr>
+      </thead>
+    </tfoot>
+  <% end %>
+</div>

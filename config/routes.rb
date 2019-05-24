@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :courses
 
   get '/signup', to: 'users#new'
+  get '/user', to: 'users#show', as: 'user_show'
   resources :users
 
   get '/login', to: 'sessions#new'
