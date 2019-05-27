@@ -1,6 +1,10 @@
 <% provide(:title, "Top") %>
 <div class="container">
   <h1>Training DB Webapp</h1>
+  <% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
+
   <%= image_tag 'logo.svg', class: "col-md-4", vspace: 20 %>
   
   <h2>Search</h2>

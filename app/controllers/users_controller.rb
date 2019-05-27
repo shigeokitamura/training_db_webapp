@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:show]
 
   def new
+    if logged_in?
+      flash[:danger] = "You are already logged in."
+      redirect_to :root
+    end
     @user = User.new
   end
 
