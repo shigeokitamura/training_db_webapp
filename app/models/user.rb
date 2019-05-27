@@ -50,17 +50,23 @@ class User < ApplicationRecord
 
   # コースを購入する
   def buy(course)
-    buying << course
+    ActiveRecord::Base.transaction do
+      buying << course
+    end
   end
 
   # 購入をやめる
   def cancel(course)
-    active_orders.find_by(bought_id: course.course_id).destroy
+    ActiveRecord::Base.transaction do
+      active_orders.find_by(bought_id: course.course_id).destroy
+    end
   end
 
   # 購入していたらtrueを返す
   def buying?(course)
-    buying.include?(course)
+    ActiveRecord::Base.transaction do
+      buying.include?(course)
+    end
   end
 
 end
