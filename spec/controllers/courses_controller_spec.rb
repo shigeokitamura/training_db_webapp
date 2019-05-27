@@ -25,7 +25,7 @@ RSpec.describe CoursesController, type: :controller do
     it 'assigns new @course' do
       expect(assigns(:course)).to be_a_new Course
     end
-    it 'renderes the :new template' do
+    it 'renders the :new template' do
       expect(response).to render_template :new
     end
   end

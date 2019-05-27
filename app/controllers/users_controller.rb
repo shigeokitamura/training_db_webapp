@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:show]
 
   def new
+    if logged_in?
+      flash[:danger] = "You are already logged in."
+      redirect_to :root
+    end
     @user = User.new
   end
 
@@ -22,18 +26,15 @@ class UsersController < ApplicationController
     @total = @orders.sum { |hash| hash[:price] }
   end
 
-  def edit
+  def edit; end
 
-  end
-
-  def update
-
-  end
+  def update; end
 
   private
 
   def user_params
-    id = User.maximum('user_id') + 1
+    # 最初のユーザはidは1、それ以降のidは最大値+1
+    id = User.maximum('user_id').nil? ? 1 : User.maximum('user_id') + 1
     params.require(:user).
       permit(:user_name, :age, :dept, :password, :password_confirmation).
       merge(user_id: id)
