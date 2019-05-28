@@ -15,4 +15,11 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   resources :orders, only: [:create, :destroy]
+
+  # API
+  namespace 'api' do
+    namespace 'v1' do
+      resources :courses
+    end
+  end
 end
