@@ -7,6 +7,7 @@ class UsersController < ApplicationController
       flash[:danger] = "You are already logged in."
       redirect_to :root
     end
+    session[:after_login] = Rails.application.routes.recognize_path(request.referer)
     @user = User.new
   end
 
@@ -14,7 +15,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      redirect_to :root
+      if session[:after_login]
+        redirect_to session[:after_login]
+      else
+        redirect_to :root
+      end
     else
       render 'new'
     end
