@@ -58,11 +58,18 @@ module Api
       def update
         course = Course.find(params[:id])
         if course.update(course_params)
-          render json: {
-            status: "SUCCESS",
-            message: "updated the course",
-            data: course
-          }
+          if params[:id] == course.course_id
+            render json: {
+              status: "SUCCESS",
+              message: "updated the course",
+              data: course
+            }
+          else
+            render json: {
+              status: "ERROR",
+              message: "course_id must not be changed"
+            }
+          end
         else
           render json: {
             status: "ERROR",
@@ -77,7 +84,7 @@ module Api
         render json: {
           status: "SUCCESS",
           message: "deleted the course",
-          data: post
+          data: course
         }
       end
 
