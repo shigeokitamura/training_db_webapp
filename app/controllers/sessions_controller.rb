@@ -1,12 +1,18 @@
 class SessionsController < ApplicationController
-  def new; end
+  def new
+    session[:after_login] = Rails.application.routes.recognize_path(request.referer)
+  end
 
   def create
     user = User.find_by(user_name: params[:session][:user_name])
     if user&.authenticate(params[:session][:password])
       log_in user
-      redirect_to :root
-    else
+      if session[:after_login]
+        redirect_to session[:after_login]
+        session[:after_login] = nil
+      else
+        redirect_to :root
+      end
       flash.now[:danger] = 'Invalid username/password combination'
       render 'new'
     end
@@ -14,6 +20,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to :root
+    redirect_to Rails.application.routes.recognize_path(request.referer)
   end
 end
