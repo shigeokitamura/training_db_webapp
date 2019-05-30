@@ -3,6 +3,15 @@ module Api
     class OrdersController < ApplicationController
       protect_from_forgery except: [:create]
 
+      def index
+        orders = Order.all
+        render json: {
+          status: "SUCCESS",
+          message: "loaded orders",
+          data: orders
+        }
+      end
+
       def create
         course = Course.find_by(course_id: params[:course_id])
         if course
