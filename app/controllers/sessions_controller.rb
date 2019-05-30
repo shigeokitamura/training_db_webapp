@@ -10,10 +10,10 @@ class SessionsController < ApplicationController
       if session[:after_login]
         redirect_to session[:after_login]
         session[:after_login] = nil
-      else
-        flash.now[:danger] = 'Invalid username/password combination'
-        render 'new'
       end
+    else
+      flash.now[:danger] = 'Invalid username/password combination'
+      render 'new'
     end
   end
 

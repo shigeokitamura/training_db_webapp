@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     namespace 'v1' do
       resources :courses
       resources :orders, only: [:index, :show, :create, :destroy]
+      resources :users, only: :show
     end
   end
 end
