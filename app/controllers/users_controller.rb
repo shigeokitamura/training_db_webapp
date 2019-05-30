@@ -2,6 +2,13 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show]
   before_action :correct_user, only: [:show]
 
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    render json: {
+      status: "ERROR",
+      message: exception
+    }
+  end
+
   def new
     if logged_in?
       flash[:danger] = "You are already logged in."
