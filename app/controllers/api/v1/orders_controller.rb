@@ -70,14 +70,27 @@ module Api
       def destroy
         order = Order.find(params[:id])
         if order
-          # TODO
-          # 他のユーザが消せないようにする
-          order.destroy
-          render json: {
-            status: "SUCCCESS",
-            message: "deleted the order",
-            data: order
-          }
+          user = User.find_by(user_name: params[:user_name])
+          if user&.id == order.buyer_id
+            if user&.authenticate(params[:password])
+              order.destroy
+              render json: {
+                status: "SUCCCESS",
+                message: "deleted the order",
+                data: order
+              }
+            else
+              render json: {
+                status: "ERROR",
+                message: "authentication failed"
+              }
+            end
+          else
+            render json: {
+              status: "ERROR",
+              message: "user is invalid"
+            }
+          end
         else
           render json: {
             status: "ERROR",
