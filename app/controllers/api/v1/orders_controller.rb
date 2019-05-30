@@ -3,6 +3,13 @@ module Api
     class OrdersController < ApplicationController
       protect_from_forgery except: [:create]
 
+      rescue_from ActiveRecord::RecordNotFound do |exception|
+        render json: {
+          status: "ERROR",
+          message: exception
+        }
+      end
+
       def index
         orders = Order.all
         render json: {
@@ -10,6 +17,22 @@ module Api
           message: "loaded orders",
           data: orders
         }
+      end
+
+      def show
+        order = Order.find(params[:id])
+        if order
+          render json: {
+            status: "SUCCESS",
+            message: "loaded order",
+            data: order
+          }
+        else
+          render json: {
+            status: "ERROR",
+            message: "order not found"
+          }
+        end
       end
 
       def create
@@ -33,6 +56,23 @@ module Api
           render json: {
             status: "ERROR",
             message: "course not found"
+          }
+        end
+      end
+
+      def destroy
+        order = Order.find(params[:id])
+        if order
+          order.destroy
+          render json: {
+            status: "SUCCCESS",
+            message: "deleted the order",
+            data: order
+          }
+        else
+          render json: {
+            status: "ERROR",
+            message: "order not found"
           }
         end
       end
