@@ -40,12 +40,19 @@ module Api
         if course
           user = User.find_by(user_name: params[:user_name])
           if user&.authenticate(params[:password])
-            user.buy(course)
-            render json: {
-              status: "SUCCESS",
-              message: "order created",
-              data: user.active_orders.find_by(bought_id: course.course_id)
-            }
+            if !user.buying?(course)
+              user.buy(course)
+              render json: {
+                status: "SUCCESS",
+                message: "order created",
+                data: user.active_orders.find_by(bought_id: course.course_id)
+              }
+            else
+              render json: {
+                status: "ERROR",
+                message: "you have already ordered the course"
+              }
+            end
           else
             render json: {
               status: "ERROR",
@@ -63,6 +70,8 @@ module Api
       def destroy
         order = Order.find(params[:id])
         if order
+          # TODO
+          # 他のユーザが消せないようにする
           order.destroy
           render json: {
             status: "SUCCCESS",
