@@ -75,7 +75,7 @@ module Api
             if user&.authenticate(params[:password])
               order.destroy
               render json: {
-                status: "SUCCCESS",
+                status: "SUCCESS",
                 message: "deleted the order",
                 data: order
               }
